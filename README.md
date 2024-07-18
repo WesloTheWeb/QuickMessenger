@@ -44,6 +44,7 @@ Below is the tech stack I will be using. Not all of it is implemented.
 - Redux Tool Kit (RTK) + Redux
 
 ### Back-End (Not yet implemented yet)
+- ReactQuery
 - Socket.io
 - MongoDB (or Redis) 
 - NextAuth

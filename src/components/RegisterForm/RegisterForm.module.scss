@@ -6,17 +6,30 @@
     border: pink solid 2px;;
     border-radius: 10px;
 
+    label {
+        display: block;
+        margin: 0 0 .5rem 0;
+    }
+
+    select {
+        font-size: 1.2rem;
+        border-radius: 10px;
+        padding: .5rem .75rem;
+    }
+
     .header {
         margin: 0 auto;
         text-align: center;
     }
 
-    .inputField {
+    .registerInputFieldContainer {
         display: block;
+        margin: 1rem .5rem;
 
         input {
             display: block;
-            padding: .25rem .75rem;
+            border-radius: 15px;
+            padding: .5rem .75rem;
             font-size: 1.25rem;
         }
     }
