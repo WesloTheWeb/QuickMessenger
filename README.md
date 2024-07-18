@@ -1,6 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## About
+This is a NextJS full stack project that is essentially a chatroom. Users can create account and chat.
 
-## Getting Started
+## Developer 
+I want to emphasis use of TypeScript more along with technologies I have used at work such as websockets. This is to gain
+more practice. Typically I design for my projects, but for this one in particular I want to get the front-end up and 
+running as fast as possible to place a more emphasis on the backend. Particularly authentication, account creation, and
+use the App Router more of NextJS as exploratory features. Overtime, I will improve the UI but I am doing just enough
+to get the backend work at the moment. This project started on 7/17/2024.
+
+I am going to officially start treating this as a featured project with appropriate development branches and
+release branches once this launches. This will act as a update of my skills as a software engineer at this point in time,
+as well as a playground to experiment with different strategies and technologies. Some could be subtle as abstractions or
+dynamic components.
+
+## Getting Started (Local)
 
 First, run the development server:
 
@@ -20,17 +33,18 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Tech Stack
+Below is the tech stack I will be using. Not all of it is implemented. 
 
-To learn more about Next.js, take a look at the following resources:
+### Front-End
+- NextJS
+- TypeScript
+- (S)CSS Modules
+- React Hook Form
+- Redux Tool Kit (RTK) + Redux
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Back-End (Not yet implemented yet)
+- Socket.io
+- MongoDB (or Redis) 
+- NextAuth
+- Express? (possibly for Web sockets)

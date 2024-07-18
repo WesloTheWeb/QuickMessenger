@@ -1,11 +1,11 @@
-
+import RegisterForm from "@/components/RegisterForm/RegisterForm";
 
 export default function RegisterPage() {
 
     return (
-        <div>hi</div>
-    )
-}
+        <RegisterForm />
+    );
+};
 // const RegisterPage = () => {
 //     return <h1> hi</h1>
 // };

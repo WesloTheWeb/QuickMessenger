@@ -1,7 +1,10 @@
+@import './variables.scss';
+
 body {
-    background-color: rgb(23, 20, 20);
-    color: aliceblue;
+    background-color: $backgroundColor;
+    color: $fontColorText;
     margin: 0 1.5rem;
+    font-size: $bodyFontSize;
 }
 
  nav {
@@ -9,4 +12,10 @@ body {
     a {
         margin: 1.5rem;
     }
+ }
+
+ .error {
+    color: $errorTextColor;
+    font-weight: bold;
+    font-size: .9rem;
  }

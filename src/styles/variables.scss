@@ -1,0 +1,22 @@
+// Media Queries
+$mq-smallScreen: "only screen and (max-width:769px)";
+$mq-smallScreenTwo: "only screen and (max-width:767px)";
+$mq-mediumScreen: "only screen and (min-width:769px)";
+$mq-largeScreen: "only screen and (max-width:1025px)";
+$mq-speciallargeScreen: "only screen and (min-width:1024px)";
+$mq-xLargeScreen: "only screen and (min-width:1200px)";
+$mq-xxLargeScreen: "only screen and (min-width:1400px)";
+
+// Logo Properties
+$logoQuickText: rgb(19, 124, 204);
+$logoMessengerText: rgb(216, 36, 126);
+
+// General Properties
+$backgroundColor: rgb(23, 20, 20);
+$fontColorText: aliceblue;
+$bodyFontSize: 16px;
+$errorTextColor: rgb(236, 20, 20);
+
+//form properties
+$formBackground: #20223b;
+
