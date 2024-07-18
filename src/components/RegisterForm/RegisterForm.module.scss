@@ -16,6 +16,14 @@
 
         input {
             display: block;
+            padding: .25rem .75rem;
+            font-size: 1.25rem;
         }
     }
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
 }

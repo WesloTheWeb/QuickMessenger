@@ -14,6 +14,20 @@ body {
     }
  }
 
+ button {
+    padding: 10px 20px;
+    border: none;
+    margin: 1rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+    }
+  }
+  
  .error {
     color: $errorTextColor;
     font-weight: bold;

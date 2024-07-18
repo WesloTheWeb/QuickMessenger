@@ -1,0 +1,21 @@
+@import '../../styles/variables.scss';
+
+.registerButton {
+    background-color: green;
+    color: white;
+
+    &:hover {
+      font-weight: bold;
+      background-color: rgb(27, 181, 27);
+    }
+}
+  
+.cancelButton {
+    background-color: red;
+    color: white;
+
+    &:hover {
+      font-weight: bold;
+      background-color: rgb(175, 23, 23);
+    }
+}
