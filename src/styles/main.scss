@@ -1,10 +1,16 @@
 @import './variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
 
 body {
     background-color: $backgroundColor;
     color: $fontColorText;
     margin: 0 1.5rem;
     font-size: $bodyFontSize;
+       
+    @media #{$mq-smallScreen} {
+      width: 100%;
+      margin: 0;
+  }
 }
 
  nav {
@@ -14,8 +20,27 @@ body {
     }
  }
 
- .error {
+ button {
+    padding: 10px 20px;
+    border: none;
+    margin: 1rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+    }
+  }
+  
+  // Text
+ .errorMessage {
     color: $errorTextColor;
     font-weight: bold;
     font-size: .9rem;
+ }
+
+ .requiredItem {
+    color: $requiredAsteriskColor;
  }

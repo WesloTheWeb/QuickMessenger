@@ -1,38 +1,155 @@
 'use client';
-import { useForm } from 'react-hook-form';
+import React, { useEffect, useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import Button, { ButtonTypes } from '../Button/Button';
 import classes from './RegisterForm.module.scss';
+import Link from 'next/link';
 
-const { form, header, inputField } = classes
+const { registrationPersonalInformationContainer, registrationGenderAgeContainer, buttonContainer,
+  registrationGenderAgeInnerContainer, form, header, registerInputFieldContainer, radioGroup } = classes
 
-type FormValues = {
+interface FormValues {
   firstName: string;
+  lastName?: string;
+  gender: string;
+  age: number;
+  country: string;
   email: string;
   userName: string;
   password: string;
 };
 
 const RegisterForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
+  const { register, handleSubmit, control, formState: { errors } } = useForm<FormValues>();
   const onSubmit = handleSubmit((data) => console.log(data));
+
+  const [countries, setCountries] = useState<string[]>([]);
+  const COUNTRY_URL = `https://restcountries.com/v3.1/all`;
+
+  // ? Fetch the countries with API
+  const fetchCountries = async () => {
+    try {
+      const response = await fetch(COUNTRY_URL);
+      const data = await response.json();
+      const countryNames = data.map((country: any) => country.name.common);
+      setCountries(countryNames);
+    } catch (error) {
+      console.error('Error fetching countries:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCountries()
+  }, []);
 
   return (
     <>
-
       <form onSubmit={onSubmit} className={form}>
         <section className={header}>
           <h2>Registration</h2>
           <p>To begin using the messenger, create an account.</p>
         </section>
-        <div className={inputField}>
-          <label>First Name</label>
-          <input
-            {...register('firstName', { required: '*First name is required' })}
-            placeholder="First Name"
-          />
-          {errors?.firstName && <p className="error">{errors.firstName.message}</p>}
-        </div>
-        <div>
-          <label>Email:</label>
+        <section className={registrationPersonalInformationContainer}>
+          <div className={registerInputFieldContainer}>
+            <label>
+              <span className='requiredItem'>*</span>
+              First Name
+            </label>
+            <input
+              {...register('firstName', { required: '*First name is required' })}
+              placeholder="First Name"
+            />
+            {errors?.firstName && <p className="errorMessage">{errors.firstName.message}</p>}
+          </div>
+          <div className={registerInputFieldContainer}>
+            <label>
+              Last Name (Optional)</label>
+            <input
+              {...register('lastName')}
+              placeholder="Last Name (Optional)"
+            />
+            {errors?.lastName && <p className="errorMessage">{errors.lastName.message}</p>}
+          </div>
+          <section className={registrationGenderAgeContainer}>
+            <div className={registerInputFieldContainer}>
+              <label>
+                <span className='requiredItem'>*</span>
+                Age
+              </label>
+              <input
+                {...register('age')}
+                placeholder="Age"
+              />
+              {errors?.lastName && <p className="errorMessage">{errors.lastName.message}</p>}
+            </div>
+            <div className={[registerInputFieldContainer, radioGroup].join(' ')}>
+              <label>
+                <span className='requiredItem'>*</span>
+                Gender
+              </label>
+              <Controller
+                name="gender"
+                control={control}
+                defaultValue=""
+                rules={{ required: '*Gender is required' }}
+                render={({ field }) => (
+                  <section className={registrationGenderAgeInnerContainer}>
+                    <label>
+                      <input
+                        type="radio"
+                        value="male"
+                        checked={field.value === 'male'}
+                        onChange={() => field.onChange('male')}
+                      />
+                      Male
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        value="female"
+                        checked={field.value === 'female'}
+                        onChange={() => field.onChange('female')}
+                      />
+                      Female
+                    </label>
+                  </section>
+                )}
+              />
+              {errors?.gender && <p className="errorMessage">{errors.gender.message}</p>}
+            </div>
+
+          </section>
+
+          <div className={registerInputFieldContainer}>
+            <label>
+              <span className='requiredItem'>*</span>
+              Country
+            </label>
+            <Controller
+              name="country"
+              control={control}
+              defaultValue=""
+              rules={{ required: '*Country is required' }}
+              render={({ field }) => (
+                <select {...field}>
+                  <option value="">Select a country</option>
+                  {countries.map((country) => (
+                    <option key={country} value={country}>
+                      {country}
+                    </option>
+                  ))}
+                </select>
+              )}
+            />
+            {errors?.country && <p className="errorMessage">{errors.country.message}</p>}
+          </div>
+        </section>
+
+        <div className={registerInputFieldContainer}>
+          <label>
+            <span className='requiredItem'>*</span>
+            Email:
+          </label>
           <input
             {...register('email', {
               required: '*Email is required',
@@ -43,26 +160,37 @@ const RegisterForm = () => {
             })}
             placeholder="Email"
           />
-          {errors?.email && <p className="error">{errors.email.message}</p>}
+          {errors?.email && <p className="errorMessage">{errors.email.message}</p>}
         </div>
-        <div>
-          <label>Username</label>
+        <div className={registerInputFieldContainer}>
+          <label>
+            <span className='requiredItem'>*</span>
+            Username
+          </label>
           <input
             {...register('userName', { required: '*Username is required' })}
             placeholder="Username"
           />
-          {errors?.userName && <p className="error">{errors.userName.message}</p>}
+          {errors?.userName && <p className="errorMessage">{errors.userName.message}</p>}
         </div>
-        <div>
-          <label>password</label>
+        <div className={registerInputFieldContainer}>
+          <label>
+            <span className='requiredItem'>*</span>
+            Password
+          </label>
           <input
             {...register('password', { required: '*Password is required' })}
             placeholder="Password"
             type="password"
           />
-          {errors?.password && <p className="error">{errors.password.message}</p>}
+          {errors?.password && <p className="errorMessage">{errors.password.message}</p>}
         </div>
-        <input type="submit" />
+        <section className={buttonContainer}>
+          <Button buttonType={ButtonTypes.REGISTER} handleClick={onSubmit} />
+          <Link href="/">
+            <Button buttonType={ButtonTypes.CANCEL} />
+          </Link>
+        </section>
       </form>
     </>
   );

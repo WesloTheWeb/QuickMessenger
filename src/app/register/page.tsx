@@ -6,8 +6,3 @@ export default function RegisterPage() {
         <RegisterForm />
     );
 };
-// const RegisterPage = () => {
-//     return <h1> hi</h1>
-// };
-
-// export default RegisterPage;

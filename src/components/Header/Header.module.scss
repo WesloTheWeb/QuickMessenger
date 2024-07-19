@@ -33,13 +33,16 @@
         border: rgb(235, 169, 4) solid 5px;
         border-radius: 10px;
         padding: .5rem .75rem;
-
+        font-family: "Jersey 10", sans-serif;
+        font-size: 2rem;
         .title1 {
             color: $logoQuickText;
         }
 
         .title2 {
             color: $logoMessengerText;
+            display: block;
+            padding: 0 0 0 2rem;
         }
     }
 }

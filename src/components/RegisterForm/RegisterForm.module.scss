@@ -6,16 +6,83 @@
     border: pink solid 2px;;
     border-radius: 10px;
 
+    
+    @media #{$mq-smallScreen} {
+        padding: 1rem;
+    }
+
+    label {
+        display: block;
+        margin: 0 0 .5rem 0;
+    }
+
+    select {
+        font-size: 1.2rem;
+        border-radius: 10px;
+        padding: .5rem .75rem;
+
+        
+        @media #{$mq-smallScreen} {
+            width: 80%;
+        }
+    }
+
+    section.registrationPersonalInformationContainer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 2rem;
+
+        @media #{$mq-smallScreen} {
+            display: block;
+        }
+    }
+
+    section.registrationGenderAgeContainer {
+        display: grid;
+        grid-template-columns: 2fr 8fr;
+        align-items: self-end;
+
+        @media #{$mq-smallScreen} {
+            display: block;
+        }
+
+        .registrationGenderAgeInnerContainer {
+            display: flex;
+            justify-content: start;
+
+            label:first-child {
+                margin: 0 2rem;
+            }
+
+            .radioGroup {
+                label {
+                    display: block;
+                } 
+            }
+        }
+    }
+
     .header {
         margin: 0 auto;
         text-align: center;
     }
 
-    .inputField {
+    .registerInputFieldContainer {
         display: block;
+        margin: 1rem .5rem;
 
         input {
+            min-width: 90%;
             display: block;
+            border-radius: 15px;
+            padding: .5rem .75rem;
+            font-size: 1.25rem;
         }
     }
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
 }
