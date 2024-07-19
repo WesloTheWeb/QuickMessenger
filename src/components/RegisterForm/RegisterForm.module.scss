@@ -6,6 +6,11 @@
     border: pink solid 2px;;
     border-radius: 10px;
 
+    
+    @media #{$mq-smallScreen} {
+        padding: 1rem;
+    }
+
     label {
         display: block;
         margin: 0 0 .5rem 0;
@@ -15,18 +20,31 @@
         font-size: 1.2rem;
         border-radius: 10px;
         padding: .5rem .75rem;
+
+        
+        @media #{$mq-smallScreen} {
+            width: 80%;
+        }
     }
 
     section.registrationPersonalInformationContainer {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 2rem;
+
+        @media #{$mq-smallScreen} {
+            display: block;
+        }
     }
 
     section.registrationGenderAgeContainer {
         display: grid;
         grid-template-columns: 2fr 8fr;
         align-items: self-end;
+
+        @media #{$mq-smallScreen} {
+            display: block;
+        }
 
         .registrationGenderAgeInnerContainer {
             display: flex;
@@ -40,7 +58,6 @@
                 label {
                     display: block;
                 } 
- 
             }
         }
     }
@@ -55,7 +72,7 @@
         margin: 1rem .5rem;
 
         input {
-            min-width: 95%;
+            min-width: 90%;
             display: block;
             border-radius: 15px;
             padding: .5rem .75rem;
