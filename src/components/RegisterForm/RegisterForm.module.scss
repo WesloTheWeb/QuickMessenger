@@ -17,6 +17,34 @@
         padding: .5rem .75rem;
     }
 
+    section.registrationPersonalInformationContainer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 2rem;
+    }
+
+    section.registrationGenderAgeContainer {
+        display: grid;
+        grid-template-columns: 2fr 8fr;
+        align-items: self-end;
+
+        .registrationGenderAgeInnerContainer {
+            display: flex;
+            justify-content: start;
+
+            label:first-child {
+                margin: 0 2rem;
+            }
+
+            .radioGroup {
+                label {
+                    display: block;
+                } 
+ 
+            }
+        }
+    }
+
     .header {
         margin: 0 auto;
         text-align: center;
@@ -27,6 +55,7 @@
         margin: 1rem .5rem;
 
         input {
+            min-width: 95%;
             display: block;
             border-radius: 15px;
             padding: .5rem .75rem;

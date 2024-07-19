@@ -29,8 +29,13 @@ body {
     }
   }
   
+  // Text
  .errorMessage {
     color: $errorTextColor;
     font-weight: bold;
     font-size: .9rem;
+ }
+
+ .requiredItem {
+    color: $requiredAsteriskColor;
  }

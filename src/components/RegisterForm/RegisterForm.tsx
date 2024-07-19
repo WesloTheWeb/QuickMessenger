@@ -5,12 +5,14 @@ import Button, { ButtonTypes } from '../Button/Button';
 import classes from './RegisterForm.module.scss';
 import Link from 'next/link';
 
-const { buttonContainer, form, header, registerInputFieldContainer, radioGroup } = classes
+const { registrationPersonalInformationContainer, registrationGenderAgeContainer, buttonContainer,
+  registrationGenderAgeInnerContainer, form, header, registerInputFieldContainer, radioGroup } = classes
 
 interface FormValues {
   firstName: string;
   lastName?: string;
   gender: string;
+  age: number;
   country: string;
   email: string;
   userName: string;
@@ -47,9 +49,12 @@ const RegisterForm = () => {
           <h2>Registration</h2>
           <p>To begin using the messenger, create an account.</p>
         </section>
-        <section>
+        <section className={registrationPersonalInformationContainer}>
           <div className={registerInputFieldContainer}>
-            <label>First Name</label>
+            <label>
+              <span className='requiredItem'>*</span>
+              First Name
+            </label>
             <input
               {...register('firstName', { required: '*First name is required' })}
               placeholder="First Name"
@@ -57,15 +62,69 @@ const RegisterForm = () => {
             {errors?.firstName && <p className="errorMessage">{errors.firstName.message}</p>}
           </div>
           <div className={registerInputFieldContainer}>
-            <label>Last Name (Optional)</label>
+            <label>
+              Last Name (Optional)</label>
             <input
               {...register('lastName')}
               placeholder="Last Name (Optional)"
             />
             {errors?.lastName && <p className="errorMessage">{errors.lastName.message}</p>}
           </div>
+          <section className={registrationGenderAgeContainer}>
+            <div className={registerInputFieldContainer}>
+              <label>
+                <span className='requiredItem'>*</span>
+                Age
+              </label>
+              <input
+                {...register('age')}
+                placeholder="Age"
+              />
+              {errors?.lastName && <p className="errorMessage">{errors.lastName.message}</p>}
+            </div>
+            <div className={[registerInputFieldContainer, radioGroup].join(' ')}>
+              <label>
+                <span className='requiredItem'>*</span>
+                Gender
+              </label>
+              <Controller
+                name="gender"
+                control={control}
+                defaultValue=""
+                rules={{ required: '*Gender is required' }}
+                render={({ field }) => (
+                  <section className={registrationGenderAgeInnerContainer}>
+                    <label>
+                      <input
+                        type="radio"
+                        value="male"
+                        checked={field.value === 'male'}
+                        onChange={() => field.onChange('male')}
+                      />
+                      Male
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        value="female"
+                        checked={field.value === 'female'}
+                        onChange={() => field.onChange('female')}
+                      />
+                      Female
+                    </label>
+                  </section>
+                )}
+              />
+              {errors?.gender && <p className="errorMessage">{errors.gender.message}</p>}
+            </div>
+
+          </section>
+
           <div className={registerInputFieldContainer}>
-            <label>Country</label>
+            <label>
+              <span className='requiredItem'>*</span>
+              Country
+            </label>
             <Controller
               name="country"
               control={control}
@@ -84,42 +143,13 @@ const RegisterForm = () => {
             />
             {errors?.country && <p className="errorMessage">{errors.country.message}</p>}
           </div>
-          <div className={radioGroup}>
-            <label>Gender</label>
-            <Controller
-              name="gender"
-              control={control}
-              defaultValue=""
-              rules={{ required: '*Gender is required' }}
-              render={({ field }) => (
-                <div>
-                  <label>
-                    <input
-                      type="radio"
-                      value="female"
-                      checked={field.value === 'female'}
-                      onChange={() => field.onChange('female')}
-                    />
-                    Female
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      value="male"
-                      checked={field.value === 'male'}
-                      onChange={() => field.onChange('female')}
-                    />
-                    Male
-                  </label>
-                </div>
-              )}
-            />
-            {errors?.gender && <p className="errorMessage">{errors.gender.message}</p>}
-          </div>
         </section>
 
         <div className={registerInputFieldContainer}>
-          <label>Email:</label>
+          <label>
+            <span className='requiredItem'>*</span>
+            Email:
+          </label>
           <input
             {...register('email', {
               required: '*Email is required',
@@ -133,7 +163,10 @@ const RegisterForm = () => {
           {errors?.email && <p className="errorMessage">{errors.email.message}</p>}
         </div>
         <div className={registerInputFieldContainer}>
-          <label>Username</label>
+          <label>
+            <span className='requiredItem'>*</span>
+            Username
+          </label>
           <input
             {...register('userName', { required: '*Username is required' })}
             placeholder="Username"
@@ -141,7 +174,10 @@ const RegisterForm = () => {
           {errors?.userName && <p className="errorMessage">{errors.userName.message}</p>}
         </div>
         <div className={registerInputFieldContainer}>
-          <label>password</label>
+          <label>
+            <span className='requiredItem'>*</span>
+            Password
+          </label>
           <input
             {...register('password', { required: '*Password is required' })}
             placeholder="Password"
