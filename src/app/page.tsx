@@ -4,7 +4,7 @@ import "../styles/main.scss";
 export default function Home() {
   return (
     <main>
-          uwu
+        <p>In development. More features are coming!</p>
     </main>
   );
 }

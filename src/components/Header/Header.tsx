@@ -1,7 +1,7 @@
 import Link from "next/link";
 import classes from "./Header.module.scss";
 
-const { headerContainer, logoContainer, title1, title2 } = classes;
+const { headerContainer, logoContainer, title1, title2, navigationContainer } = classes;
 
 const Header = () => {
 
@@ -28,7 +28,7 @@ const Header = () => {
           <span className={title2}>Messenger</span>
         </h1>
       </div>
-      <nav>
+      <nav className={navigationContainer}>
         {navigationLinks.map((link) => {
           return (
             <Link href={link.path}>{link.text}</Link>
