@@ -17,7 +17,7 @@
         margin: 0;
     }
 
-    a {
+    a, button {
         cursor: pointer;
         color: #fff;
         text-decoration: none;
@@ -27,7 +27,6 @@
             color: blanchedalmond
         };
     }
-
 
     .logoContainer {
         border: rgb(235, 169, 4) solid 5px;
@@ -49,4 +48,15 @@
 
 .navigationContainer {
     font-size: 1.4rem;
+
+    button {
+        display: inline-block;
+        background-color: darkolivegreen;
+        color: #fff;
+        font-size: inherit;
+        margin: 0;
+        padding: .27rem .75rem;
+        border-radius: 8px;
+        font-family: inherit;
+    }
 }

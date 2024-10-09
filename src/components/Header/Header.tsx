@@ -1,7 +1,7 @@
-import Link from "next/link";
+import NavigationBar from "./NavigationBar/NavigationBar";
 import classes from "./Header.module.scss";
 
-const { headerContainer, logoContainer, title1, title2, navigationContainer } = classes;
+const { headerContainer, logoContainer, title1, title2 } = classes;
 
 const Header = () => {
 
@@ -13,11 +13,7 @@ const Header = () => {
     {
       text: "Register",
       path: "/register"
-    },
-    // {
-    //   text: "Sign in",
-    //   path: "/sign-in"
-    // }
+    }
   ];
 
   return (
@@ -28,17 +24,9 @@ const Header = () => {
           <span className={title2}>Messenger</span>
         </h1>
       </div>
-      <nav className={navigationContainer}>
-        {navigationLinks.map((link) => {
-          return (
-            <Link href={link.path}>{link.text}</Link>
-          )
-        })}
-      </nav>
+      <NavigationBar navigation={navigationLinks} />
     </section>
-
-  )
-
+  );
 };
 
 export default Header;

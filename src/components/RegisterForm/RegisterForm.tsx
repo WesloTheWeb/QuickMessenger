@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import Button, { ButtonTypes } from '../Button/Button';
 import classes from './RegisterForm.module.scss';
@@ -20,8 +20,44 @@ interface FormValues {
 };
 
 const RegisterForm = () => {
-  const { register, handleSubmit, control, formState: { errors } } = useForm<FormValues>();
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const { register, handleSubmit, control, formState: { errors }, reset } = useForm<FormValues>();
+  const [registrationStatus, setRegistrationStatus] = useState<string | null>(null);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (registrationStatus?.includes('successful')) {
+      timer = setTimeout(() => {
+        setRegistrationStatus(null);
+      }, 5000); // Clear message after 5 seconds
+    }
+    return () => clearTimeout(timer);
+  }, [registrationStatus]);
+
+  const onSubmit = async (data: FormValues) => {
+    try {
+      // ? Making the POST req to database
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'conttent-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setRegistrationStatus('Registration successful!');
+        reset();
+      } else {
+        setRegistrationStatus(`Registration failed: ${result.message}`);
+      };
+
+    } catch (err) {
+      console.log('Error occured', err);
+      setRegistrationStatus('Error occured on registration')
+    }
+  };
 
   const [countries, setCountries] = useState<string[]>([]);
   const COUNTRY_URL = `https://restcountries.com/v3.1/all`;
@@ -44,7 +80,13 @@ const RegisterForm = () => {
 
   return (
     <>
-      <form onSubmit={onSubmit} className={form}>
+      {registrationStatus && (
+        <p className={registrationStatus.includes('successful') ? 'successMessage' : 'errorMessage'}>
+          {registrationStatus}
+        </p>
+      )}
+
+      <form onSubmit={handleSubmit(onSubmit)} className={form}>
         <section className={header}>
           <h2>Registration</h2>
           <p>To begin using the messenger, create an account.</p>
