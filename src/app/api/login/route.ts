@@ -2,6 +2,13 @@ import { NextResponse } from "next/server";
 import connectToDatabase from '@/lib/mongodb';
 import User from '@/models/User';
 import bcrypt from 'bcryptjs';
+import jwt from "jsonwebtoken";
+
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!JWT_SECRET) {
+    throw new Error('JWT_SECRET is not defined in environment variables');
+}
 
 export async function POST(request: Request) {
     try {
@@ -24,8 +31,16 @@ export async function POST(request: Request) {
             return NextResponse.json({ message: 'Invalid email or password' }, { status: 400 });
         };
 
+        // Generate JWT
+        const token = jwt.sign(
+            { userId: user._id, email: user.email },
+            JWT_SECRET,
+            { expiresIn: '1h' } // Token expires in 1 hour
+        );
+
+
         // ? If password is valid, you would typically generate a JWT here. For now, return a success message
-        return NextResponse.json({ message: 'Login successful' }, { status: 200 });
+        return NextResponse.json({ message: 'Login successful', token }, { status: 200 });
 
     } catch (error) {
         console.error(error);
