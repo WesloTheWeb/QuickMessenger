@@ -9,6 +9,7 @@ const { modal, formGroup, submitButton, closeButton, errorMessage, modalButtonsC
 
 interface LoginModalProps {
   onClose: () => void;
+  onLoginSuccess: () => void;
 }
 
 interface FormValues {
@@ -16,7 +17,7 @@ interface FormValues {
   password: string;
 }
 
-const LoginModal = ({ onClose }: LoginModalProps) => {
+const LoginModal = ({ onClose, onLoginSuccess }: LoginModalProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
   const [loginError, setLoginError] = useState<string | null>(null);
   const router = useRouter();
@@ -34,7 +35,8 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
       if (response.ok) {
         // Set the token in a cookie
         document.cookie = `token=${result.token}; path=/; max-age=3600; SameSite=Strict; Secure`;
-        onClose();
+        // onClose();
+        onLoginSuccess();
         router.push('/dashboard');
       } else {
         setLoginError(result.message);
