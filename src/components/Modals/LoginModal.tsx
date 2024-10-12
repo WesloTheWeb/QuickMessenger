@@ -1,5 +1,6 @@
 'use client';
-
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Overlay from './Overlay';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import classes from './LoginModal.module.scss';
@@ -8,19 +9,43 @@ const { modal, formGroup, submitButton, closeButton, errorMessage, modalButtonsC
 
 interface LoginModalProps {
   onClose: () => void;
+  onLoginSuccess: () => void;
 }
 
 interface FormValues {
-  username: string;
+  email: string;
   password: string;
 }
 
-const LoginModal = ({ onClose }: LoginModalProps) => {
+const LoginModal = ({ onClose, onLoginSuccess }: LoginModalProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
+  const [loginError, setLoginError] = useState<string | null>(null);
+  const router = useRouter();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
-    // TODO: Handle the login logic here
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        // Set the token in a cookie
+        document.cookie = `token=${result.token}; path=/; max-age=3600; SameSite=Strict; Secure`;
+        // onClose();
+        onLoginSuccess();
+        router.push('/dashboard');
+      } else {
+        setLoginError(result.message);
+      };
+
+    } catch (error) {
+      console.error('Login error:', error);
+      setLoginError('An unexpected error occurred. Please try again.');
+    };
   };
 
   return (
@@ -31,10 +56,10 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={formGroup}>
             <input
-              {...register('username', { required: 'Username cannot be blank' })}
-              placeholder="Username or email"
+              {...register('email', { required: 'Email cannot be blank' })}
+              placeholder="Email"
             />
-            {errors.username && <p className={errorMessage}>{errors.username.message}</p>}
+            {errors.email && <p className={errorMessage}>{errors.email.message}</p>}
           </div>
           <div className={formGroup}>
             <input
