@@ -13,6 +13,14 @@ release branches once this launches. This will act as a update of my skills as a
 as well as a playground to experiment with different strategies and technologies. Some could be subtle as abstractions or
 dynamic components.
 
+Fall 2024 update:
+- Due to recent events and having more time I decided to continue development. At the time of writing users can create
+accounts and sign in. The chat components are still being made but the backend and API endpoints have been created. I plan
+on launching this soon with guest access to chatroom as it is created while still continuously integrating on this.
+
+I do want to have safety measures in store due to people being people and do not want abuse of the chat should any malicious
+users want to troll when it is live.
+
 ## Getting Started (Local)
 
 First, run the development server:
@@ -37,7 +45,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 Below is the tech stack I will be using. Not all of it is implemented. 
 
 ### Front-End
-- NextJS
+- NextJS 14+ (with App Router)
 - TypeScript
 - (S)CSS Modules
 - React Hook Form
@@ -48,4 +56,3 @@ Below is the tech stack I will be using. Not all of it is implemented.
 - Socket.io
 - MongoDB (or Redis) 
 - NextAuth
-- Express? (possibly for Web sockets)
