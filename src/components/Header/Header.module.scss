@@ -3,7 +3,7 @@
 .headerContainer {
     display: flex;
     justify-content: space-between;
-    margin: 1rem 0;
+    margin: 1rem 1.5rem;
 
     @media #{$mq-smallScreenTwo} {
         display: block;

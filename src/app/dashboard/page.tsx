@@ -35,7 +35,7 @@ export default function DashboardPage() {
   return (
     <>
       <h2>Welcome {user.firstName}</h2>
-      <UserDashboard user={user} />
+      <UserDashboard />
     </>
   );
 }

@@ -4,7 +4,7 @@
 body {
     background-color: $backgroundColor;
     color: $fontColorText;
-    margin: 0 1.5rem;
+    margin: 0 auto;
     font-size: $bodyFontSize;
        
     @media #{$mq-smallScreen} {

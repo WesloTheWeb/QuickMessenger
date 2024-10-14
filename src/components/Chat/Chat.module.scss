@@ -1,0 +1,14 @@
+@import '../../styles/variables.scss';
+
+.chatContainer {
+    position: relative;
+    background-color: $chatBackdropColor;
+    border-radius: 0 5px 0 0;
+    height: 450px;
+}
+
+// Channels
+.channelContainer {
+    text-align: center;
+    background-color: black;
+}

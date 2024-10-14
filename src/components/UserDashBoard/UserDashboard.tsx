@@ -1,18 +1,22 @@
-import DummyUserInformation from "../DummyComponents/DummyUserInformation";
 import { ProfileUser } from "@/interfaces/userInterface";
+import Menu from "./Menu/Menu";
+import classes from './UserDashboard.module.scss';
+import Chat from "../Chat/Chat";
+import Channel from "../Chat/Channel";
 
 const UserDashboard = () => {
 
-    const userInfo: ProfileUser = {
-        firstName: 'Harry'
-    };
+    const { dashboardContainer } = classes;
 
     return (
-        <section>
-            <DummyUserInformation
-                userInformation={userInfo}
-            />
-        </section>
+        <>
+            <section className={dashboardContainer}>
+                <Menu />
+                <Chat />
+                <Channel />
+            </section>
+        </>
+
     );
 };
 
