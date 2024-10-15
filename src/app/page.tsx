@@ -1,9 +1,10 @@
+import LandingHeader from "@/components/LandingPage/LandingHeader";
 import "../styles/main.scss";
 
 export default function Home() {
   return (
     <main>
-        <p>In development. More features are coming!</p>
+      <LandingHeader />
     </main>
   );
 }

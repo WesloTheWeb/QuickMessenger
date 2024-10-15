@@ -28,21 +28,21 @@ const NavigationBar = ({ navigation }: NavigationBarProps) => {
 
     useEffect(() => {
         const checkLoginStatus = () => {
-          const isTokenPresent = document.cookie.includes('token=');
-          setIsLoggedIn(isTokenPresent);
+            const isTokenPresent = document.cookie.includes('token=');
+            setIsLoggedIn(isTokenPresent);
         };
-      
+
         checkLoginStatus();
-      
+
         // Listen for custom login/logout events
         window.addEventListener('login', checkLoginStatus);
         window.addEventListener('logout', checkLoginStatus);
-      
+
         return () => {
-          window.removeEventListener('login', checkLoginStatus);
-          window.removeEventListener('logout', checkLoginStatus);
+            window.removeEventListener('login', checkLoginStatus);
+            window.removeEventListener('logout', checkLoginStatus);
         };
-      }, []);
+    }, []);
     const toggleLoginModal = () => {
         setIsLoginModalOpen(!isLoginModalOpen);
     };
@@ -67,6 +67,9 @@ const NavigationBar = ({ navigation }: NavigationBarProps) => {
                 {navigation.map((link, index) => (
                     <Link key={index} href={link.path}>{link.text}</Link>
                 ))}
+                {isLoggedIn ? (
+                    <Link href="/dashboard">Dashboard</Link>
+                ) : null}
                 {isLoggedIn ? (
                     <button onClick={handleLogout}>Logout</button>
                 ) : (

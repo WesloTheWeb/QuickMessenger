@@ -1,7 +1,39 @@
 .chatboxContainer {
+    display: flex;
     position: absolute;
     bottom: 0;
     width: 99%;
-    font-size: 1.25rem;
-    padding-bottom: 2rem;
+}
+
+.chatInput {
+    flex-grow: 1;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+
+    &:focus {
+        border-color: #007bff;
+    }
+}
+
+.sendButton {
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: #0056b3;
+    }
+
+    &:active {
+        background-color: #004085;
+    }
 }
