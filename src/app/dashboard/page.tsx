@@ -3,9 +3,10 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import UserDashboard from "@/components/UserDashBoard/UserDashboard";
+import { ProfileUser } from '@/interfaces/UserInterface';
 
 export default function DashboardPage() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<ProfileUser | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -25,7 +26,8 @@ export default function DashboardPage() {
       } finally {
         setLoading(false);
       }
-    }
+    };
+    
     fetchUserData();
   }, [router]);
 
@@ -34,8 +36,8 @@ export default function DashboardPage() {
 
   return (
     <>
-      <h2>Welcome {user.firstName}</h2>
-      <UserDashboard user={user} />
+      <h2 className='dashboard-header'>Welcome, {user.firstName} !</h2>
+      <UserDashboard />
     </>
   );
 }
