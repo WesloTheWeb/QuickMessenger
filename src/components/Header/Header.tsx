@@ -1,7 +1,9 @@
+import Image from 'next/image';
 import NavigationBar from "./NavigationBar/NavigationBar";
 import classes from "./Header.module.scss";
+import Link from 'next/link';
 
-const { headerContainer, logoContainer, title1, title2 } = classes;
+const { headerContainer, logoContainer, logoLink } = classes;
 
 const Header = () => {
 
@@ -18,12 +20,16 @@ const Header = () => {
 
   return (
     <section className={headerContainer}>
-      <div className={logoContainer}>
-        <h1>
-          <span className={title1}>Quick</span>
-          <span className={title2}>Messenger</span>
-        </h1>
-      </div>
+      <Link href="/" className={logoLink}>
+        <Image
+          src="/logo-quick-messenger.svg"
+          alt="Quick Messenger Logo"
+          width={200}
+          height={51}
+          style={{ width: '100%', height: 'auto' }}
+        />
+      </Link>
+
       <NavigationBar navigation={navigationLinks} />
     </section>
   );
