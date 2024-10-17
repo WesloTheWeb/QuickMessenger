@@ -49,8 +49,7 @@ const MobileNavigationWrapper = ({ navigation }: MobileNavigationWrapperProps) =
   };
 
   const handleLoginClick = () => {
-    // Implement login logic or open login modal
-    // For now, let's just redirect to a login page
+    // TODO Implement login logic or open login modal For now, just redirect to a login page. Have modal component
     router.push('/login');
   };
 
