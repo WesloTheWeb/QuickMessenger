@@ -3,16 +3,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import LoginModal from "@/components/Modals/LoginModal";
+import { NavigationItem } from "@/interfaces/NavigationInterface";
 import classes from '../Header.module.scss';
-
-interface NavigationItem {
-    text: string;
-    path: string;
-}
 
 interface NavigationBarProps {
     navigation: NavigationItem[];
-}
+};
 
 const { navigationContainer } = classes;
 
@@ -20,11 +16,6 @@ const NavigationBar = ({ navigation }: NavigationBarProps) => {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const router = useRouter();
-
-    // useEffect(() => {
-    //     // Check if token exists in cookies
-    //     setIsLoggedIn(document.cookie.includes('token='));
-    // }, []);
 
     useEffect(() => {
         const checkLoginStatus = () => {
