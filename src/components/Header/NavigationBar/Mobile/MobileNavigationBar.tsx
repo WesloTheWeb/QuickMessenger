@@ -32,7 +32,7 @@ const MobileNavigationBar = ({
             </button>
             {isOpen && (
                 <>
-                    <Overlay onClick={toggleMenu} />
+                    <Overlay onClose={toggleMenu} />
                     <nav className={mobileNav}>
                         {navigation.map((link, index) => (
                             <Link key={index} href={link.path} onClick={toggleMenu}>
