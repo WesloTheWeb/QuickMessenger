@@ -11,6 +11,8 @@ interface MobileNavigationWrapperProps {
 
 const MobileNavigationWrapper = ({ navigation }: MobileNavigationWrapperProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(false);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -19,13 +21,21 @@ const MobileNavigationWrapper = ({ navigation }: MobileNavigationWrapperProps) =
       setIsLoggedIn(isTokenPresent);
     };
 
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 768);
+    };
+
     checkLoginStatus();
+    handleResize();
+
     window.addEventListener('login', checkLoginStatus);
     window.addEventListener('logout', checkLoginStatus);
+    window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('login', checkLoginStatus);
       window.removeEventListener('logout', checkLoginStatus);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -50,6 +60,7 @@ const MobileNavigationWrapper = ({ navigation }: MobileNavigationWrapperProps) =
       isLoggedIn={isLoggedIn}
       onLogout={handleLogout}
       onLoginClick={handleLoginClick}
+      isMobileView={isMobileView}
     />
   );
 };

@@ -13,23 +13,29 @@ interface MobileNavigationBarProps {
     isLoggedIn: boolean;
     onLogout: () => void;
     onLoginClick: () => void;
+    isMobileView: boolean;
 }
 
 const MobileNavigationBar = ({
     navigation,
     isLoggedIn,
     onLogout,
-    onLoginClick
+    onLoginClick,
+    isMobileView
 }: MobileNavigationBarProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
+    if (!isMobileView) return null;
+
     return (
         <>
-            <button onClick={toggleMenu} className={hamburgerButton}>
-                ☰
-            </button>
+            <div>
+                <button onClick={toggleMenu} className={hamburgerButton}>
+                    ☰
+                </button>
+            </div>
             {isOpen && (
                 <>
                     <Overlay onClose={toggleMenu} />

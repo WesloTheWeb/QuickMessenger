@@ -32,7 +32,6 @@ const Header = () => {
           style={{ width: '100%', height: 'auto' }}
         />
       </Link>
-
       <NavigationBar navigation={navigationLinks} />
       <MobileNavigationWrapper navigation={navigationLinks} />
       {/* <MobileNavigationBar navigation={navigationLinks} /> */}
