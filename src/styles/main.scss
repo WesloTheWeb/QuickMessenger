@@ -5,7 +5,7 @@
 body {
     background-color: $backgroundColor;
     color: $fontColorText;
-    margin: 0 auto;
+    margin: 0 .25rem;
     font-size: $bodyFontSize;
        
     @media #{$mq-smallScreen} {
@@ -56,4 +56,10 @@ textarea {
 
  .dashboard-header {
    margin-left: 2rem;
+ }
+
+ // Profile Page SCSS
+ .profile-layout {
+   display: grid;
+   grid-template-columns: 1fr 4fr;
  }

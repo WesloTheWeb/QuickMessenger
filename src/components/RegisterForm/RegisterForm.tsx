@@ -1,23 +1,13 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { FormValues } from '@/interfaces/FormInterface';
 import Button, { ButtonTypes } from '../Button/Button';
 import classes from './RegisterForm.module.scss';
 import Link from 'next/link';
 
 const { registrationPersonalInformationContainer, registrationGenderAgeContainer, buttonContainer,
-  registrationGenderAgeInnerContainer, form, header, registerInputFieldContainer, radioGroup } = classes
-
-interface FormValues {
-  firstName: string;
-  lastName?: string;
-  gender: string;
-  age: number;
-  country: string;
-  email: string;
-  userName: string;
-  password: string;
-};
+  registrationGenderAgeInnerContainer, form, header, registerInputFieldContainer, radioGroup } = classes;
 
 const RegisterForm = () => {
   const { register, handleSubmit, control, formState: { errors }, reset } = useForm<FormValues>();

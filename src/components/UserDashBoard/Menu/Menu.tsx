@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import classes from './Menu.module.scss';
 
 const Menu = ({ }) => {
@@ -9,10 +10,10 @@ const Menu = ({ }) => {
             actionName: 'Home',
             urlPath: '/'
         },
-        // {
-        //     actionName: 'Settings',
-        //     urlPath: '#'
-        // },
+        {
+            actionName: 'User Settings',
+            urlPath: '/profile'
+        },
         // {
         //     actionName: 'Channels',
         //     url: '#'
@@ -24,7 +25,11 @@ const Menu = ({ }) => {
             {
                 menu_options.map((menuAction, index) => {
                     return (
-                        <button key={index}>{menuAction.actionName}</button>
+                        <Link
+                            key={index}
+                            href={menuAction.urlPath}>
+                            <button key={index}>{menuAction.actionName}</button>
+                        </Link>
                     );
                 })
             }
