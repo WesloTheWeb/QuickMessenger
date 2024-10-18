@@ -1,0 +1,33 @@
+.profileInput {
+    display: flex;
+    flex-direction: column;
+
+    label { 
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .inputWrapper {
+        align-items: center;
+
+        input {
+            flex-grow: 1;
+            padding: 0.2rem 0.75rem;
+            margin-right: 0.5rem;
+        }
+
+        button {
+            // height: 100%;
+            font-size: 1rem;
+            border-radius: 5px;
+            margin: 0 .5rem;
+            padding: .25rem 1rem;
+            background-color: rgb(35, 161, 35);
+            color: #fff;
+
+            &:hover {
+                background-color: green;
+            }
+        }
+    }
+}

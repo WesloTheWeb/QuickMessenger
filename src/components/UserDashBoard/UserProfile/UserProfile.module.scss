@@ -2,4 +2,9 @@
 
 .UserProfileContainer {
     background-color: $profilePageBackgroundColor;
+    padding: 1.5rem 1rem;
+
+    h2 {
+        margin-top: 0;
+    }
 }

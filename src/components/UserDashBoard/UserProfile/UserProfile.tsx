@@ -8,7 +8,7 @@ const UserProfile = ({ }) => {
 
     return (
         <section className={UserProfileContainer}>
-            <h1>User Settings</h1>
+            <h2>User Settings</h2>
             <ProfileForm />
         </section>
     );
