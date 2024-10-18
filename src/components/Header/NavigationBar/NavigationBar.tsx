@@ -6,6 +6,9 @@ import LoginModal from "@/components/Modals/LoginModal";
 import { NavigationItem } from "@/interfaces/NavigationInterface";
 import classes from '../Header.module.scss';
 
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import { increment, decrement } from "@/redux/slices/counterSlice";
+
 interface NavigationBarProps {
     navigation: NavigationItem[];
 };
@@ -16,6 +19,9 @@ const NavigationBar = ({ navigation }: NavigationBarProps) => {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const router = useRouter();
+
+    const count = useAppSelector((state) => state.counter.value);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         const checkLoginStatus = () => {
@@ -68,6 +74,11 @@ const NavigationBar = ({ navigation }: NavigationBarProps) => {
                 )}
             </nav>
             {isLoginModalOpen && <LoginModal onClose={toggleLoginModal} onLoginSuccess={handleLoginSuccess} />}
+            {/* <div>
+                Counter: {count}
+                <button onClick={() => dispatch(increment())}>+</button>
+                <button onClick={() => dispatch(decrement())}>-</button>
+            </div> */}
         </>
     );
 };
