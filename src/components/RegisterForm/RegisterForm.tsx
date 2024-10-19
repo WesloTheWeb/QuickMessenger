@@ -229,3 +229,7 @@ const RegisterForm = () => {
 };
 
 export default RegisterForm;
+
+// TODO: Issue when completing form. Operation completes.
+// TODO: Actually form resets. Maybe clear the form with a toast saying its done a completed state instead of clearing form.
+// TODO: Fix typescript issue on handleClick
