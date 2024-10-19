@@ -7,16 +7,16 @@ export async function middleware(request: NextRequest) {
 
   if (!token) {
     return NextResponse.redirect(new URL('/login', request.url));
-  }
+  };
 
   try {
     const { payload } = await jwtVerify(token, new TextEncoder().encode(process.env.JWT_SECRET));
     return NextResponse.next();
   } catch (error) {
     return NextResponse.redirect(new URL('/login', request.url));
-  }
-}
+  };
+};
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/api/protected/:path*'],
+  matcher: ['/dashboard/:path*', '/profile/:path*', '/api/protected/:path*'],
 };
