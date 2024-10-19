@@ -2,12 +2,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import LoginModal from "@/components/Modals/LoginModal";
 import { NavigationItem } from "@/interfaces/NavigationInterface";
-import classes from '../Header.module.scss';
+import { logout, setAuthState } from "@/redux/slices/authSlice";
 
-import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import { increment, decrement } from "@/redux/slices/counterSlice";
+import classes from '../Header.module.scss';
 
 interface NavigationBarProps {
     navigation: NavigationItem[];
@@ -16,45 +16,47 @@ interface NavigationBarProps {
 const { navigationContainer } = classes;
 
 const NavigationBar = ({ navigation }: NavigationBarProps) => {
-    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const router = useRouter();
-
-    const count = useAppSelector((state) => state.counter.value);
+    const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
     const dispatch = useAppDispatch();
 
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const router = useRouter();
+
     useEffect(() => {
-        const checkLoginStatus = () => {
-            const isTokenPresent = document.cookie.includes('token=');
-            setIsLoggedIn(isTokenPresent);
+        async function checkAuthStatus() {
+            try {
+                const response = await fetch('/api/check-auth');
+                const data = await response.json();
+
+                if (data.isLoggedIn) {
+                    dispatch(setAuthState({
+                        isLoggedIn: true,
+                        user: data.user
+                    }));
+                }
+            } catch (error) {
+                console.error('Error checking auth status:', error);
+            }
         };
 
-        checkLoginStatus();
+        checkAuthStatus();
+    }, [dispatch]);
 
-        // Listen for custom login/logout events
-        window.addEventListener('login', checkLoginStatus);
-        window.addEventListener('logout', checkLoginStatus);
-
-        return () => {
-            window.removeEventListener('login', checkLoginStatus);
-            window.removeEventListener('logout', checkLoginStatus);
-        };
-    }, []);
     const toggleLoginModal = () => {
         setIsLoginModalOpen(!isLoginModalOpen);
     };
 
     const handleLogout = async () => {
         const response = await fetch('/api/logout', { method: 'POST' });
+
         if (response.ok) {
             document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-            setIsLoggedIn(false);
+            dispatch(logout());
             router.push('/');
         };
     };
 
     const handleLoginSuccess = () => {
-        setIsLoggedIn(true);
         setIsLoginModalOpen(false);
     };
 
@@ -65,20 +67,15 @@ const NavigationBar = ({ navigation }: NavigationBarProps) => {
                     <Link key={index} href={link.path}>{link.text}</Link>
                 ))}
                 {isLoggedIn ? (
-                    <Link href="/dashboard">Dashboard</Link>
-                ) : null}
-                {isLoggedIn ? (
-                    <button onClick={handleLogout}>Logout</button>
+                    <>
+                        <Link href="/dashboard">Dashboard</Link>
+                        <button onClick={handleLogout}>Logout</button>
+                    </>
                 ) : (
                     <button onClick={toggleLoginModal}>Sign in</button>
                 )}
             </nav>
             {isLoginModalOpen && <LoginModal onClose={toggleLoginModal} onLoginSuccess={handleLoginSuccess} />}
-            {/* <div>
-                Counter: {count}
-                <button onClick={() => dispatch(increment())}>+</button>
-                <button onClick={() => dispatch(decrement())}>-</button>
-            </div> */}
         </>
     );
 };

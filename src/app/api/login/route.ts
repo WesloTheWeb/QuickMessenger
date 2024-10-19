@@ -40,7 +40,15 @@ export async function POST(request: Request) {
 
 
         // ? If password is valid, you would typically generate a JWT here. For now, return a success message
-        return NextResponse.json({ message: 'Login successful', token }, { status: 200 });
+        return NextResponse.json({
+            message: 'Login successful',
+            token,
+            user: {
+                _id: user._id.toString(),
+                userName: user.userName,
+                email: user.email,
+            }
+        }, { status: 200 });
 
     } catch (error) {
         console.error(error);

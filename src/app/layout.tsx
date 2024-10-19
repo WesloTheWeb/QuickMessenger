@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import QueryProvider from "@/components/QueryProvider/QueryProvider";
 import '../styles/main.scss';
 import Header from "@/components/Header/Header";
 
@@ -24,10 +23,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <QueryProvider>
           <Header />
           {children}
-        </QueryProvider>
       </body>
     </html>
   );
