@@ -3,19 +3,20 @@
 import { useProtectedRoute } from "@/hooks/useProtectedRoute";
 import Menu from "@/components/UserDashBoard/Menu/Menu";
 import UserProfile from "@/components/UserDashBoard/UserProfile/UserProfile";
+import StoreProvider from "@/components/StoreProvider";
 
 const ProfilePage = () => {
-    const isLoggedIn = useProtectedRoute();
+    const { isLoggedIn, userData } = useProtectedRoute(true);
 
-    if (!isLoggedIn) return null;
+    if (!isLoggedIn || !userData) return null;
 
     return (
-        <>
+        <StoreProvider>
             <section className="profile-layout">
                 <Menu />
-                <UserProfile />
+                <UserProfile userData={userData} />
             </section>
-        </>
+        </StoreProvider>
     );
 };
 

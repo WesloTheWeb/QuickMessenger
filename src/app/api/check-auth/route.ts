@@ -21,13 +21,13 @@ export async function GET(request: Request) {
 
         if (!user) {
             return NextResponse.json({ isLoggedIn: false }, { status: 200 });
-        }
+        };
 
         return NextResponse.json({
             isLoggedIn: true,
             user: {
                 id: user._id.toString(),
-                username: user.userName,
+                username: user.username,
                 email: user.email,
             }
         });

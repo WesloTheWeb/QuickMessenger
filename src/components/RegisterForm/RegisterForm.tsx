@@ -200,10 +200,10 @@ const RegisterForm = () => {
             Username
           </label>
           <input
-            {...register('userName', { required: '*Username is required' })}
+            {...register('username', { required: '*Username is required' })}
             placeholder="Username"
           />
-          {errors?.userName && <p className="errorMessage">{errors.userName.message}</p>}
+          {errors?.username && <p className="errorMessage">{errors.username.message}</p>}
         </div>
         <div className={registerInputFieldContainer}>
           <label>

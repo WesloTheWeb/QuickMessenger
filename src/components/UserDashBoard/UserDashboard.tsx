@@ -1,4 +1,3 @@
-import { ProfileUser } from "@/interfaces/userInterface";
 import Menu from "./Menu/Menu";
 import classes from './UserDashboard.module.scss';
 import Chat from "../Chat/Chat";

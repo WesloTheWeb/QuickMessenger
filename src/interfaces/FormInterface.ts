@@ -5,6 +5,6 @@ export interface FormValues {
     age: number;
     country: string;
     email: string;
-    userName: string;
+    username: string;
     password: string;
 };

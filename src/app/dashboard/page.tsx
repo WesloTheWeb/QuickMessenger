@@ -13,7 +13,7 @@ export default function DashboardPage() {
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const response = await fetch('/api/user');
+        const response = await fetch('/api/user/profile');
         if (response.ok) {
           const data = await response.json();
           setUser(data.user);

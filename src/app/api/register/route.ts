@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     await connectToDatabase();
 
     // ? Extracts data from the request
-    const { firstName, lastName, gender, age, country, email, userName, password } = await request.json();
+    const { firstName, lastName, gender, age, country, email, username, password } = await request.json();
 
     // ! Server-side input validation:
     if (typeof firstName !== 'string' || firstName.length > 50) {
@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     }
 
     // ? Check for existing user:
-    const existingUser = await User.findOne({ $or: [{ email }, { userName }] });
+    const existingUser = await User.findOne({ $or: [{ email }, { username }] });
     if (existingUser) {
       return NextResponse.json({ message: 'Email or username already exists' }, { status: 400 });
     }
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
       age,
       country,
       email,
-      userName,
+      username,
       password,
     });
 
