@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useAppDispatch } from '@/redux/hooks';
 import { setUser } from '@/redux/slices/userSlice';
@@ -13,27 +13,40 @@ interface ProfileFormProps {
     userData: ProfileUser;
 };
 
-const { profileSection } = classes;
+const { profileSection, userSection } = classes;
 
 const ProfileForm = ({ userData }: ProfileFormProps) => {
     const dispatch = useAppDispatch();
+
+    const [userInformation, setUserInformation] = useState<ProfileUser | null>(null);
     const { register, handleSubmit, control, formState: { errors }, reset } = useForm<FormValues>();
 
     useEffect(() => {
         if (userData) {
             dispatch(setUser(userData));
+            setUserInformation(userData);
             // reset(userData);
-        }
+        };
+
     }, [userData, dispatch, reset]);
 
-    // TODO: Repeated fetch code maybe simplify?
-    // TODO: Iterate data over Profile Field read only .
+    const profileData = userInformation ? Object.entries(userInformation)?.slice(1) : [];
 
     return (
         <form className={profileSection}>
             <h3>General Settings</h3>
             <p>This is the place where you can change part of your profile.</p>
-            <ProfileField />
+            <section className={userSection}>
+                {profileData.map(([fieldName, val]) => {
+                    return (
+                        <ProfileField
+                            key={fieldName}
+                            fieldName={fieldName}
+                            fieldValue={String(val)}
+                        />
+                    )
+                })}
+            </section>
         </form>
     );
 };

@@ -1,8 +1,13 @@
 import classes from './ProfileField.module.scss';
 
-const { profileInput, inputWrapper } = classes;
+const { profileInput, inputWrapper, emailBtn } = classes;
 
-const ProfileField = ({ }) => {
+interface ProfileFieldProps {
+    fieldName: string,
+    fieldValue: string
+};
+
+const ProfileField = ({ fieldName, fieldValue }: ProfileFieldProps) => {
 
     const handleEditClick = (evnt: React.MouseEvent<HTMLButtonElement>) => {
         evnt.preventDefault();
@@ -12,19 +17,21 @@ const ProfileField = ({ }) => {
 
     return (
         <div className={profileInput}>
-            <label htmlFor="fieldName">Field Name</label>
+            <label htmlFor="fieldName">{fieldName}</label>
             <div className={inputWrapper}>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     placeholder='field name'
-                    id="fieldName" 
+                    id="fieldName"
+                    value={fieldValue}
                     readOnly
-                 />
-                <button  
+                />
+                <button
+                    className={fieldName == 'email' ? emailBtn : ''}
                     type="button"
                     onClick={handleEditClick}>
-                        Edit
-                    </button>
+                    Edit
+                </button>
             </div>
         </div>
     );

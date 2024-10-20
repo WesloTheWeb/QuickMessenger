@@ -15,8 +15,6 @@ export function useProtectedRoute(fetchProfile = false) {
         const authResponse = await fetch('/api/check-auth');
         const authData = await authResponse.json();
 
-        console.log('authData', authData)
-
         if (authData.isLoggedIn) {
           setIsLoggedIn(true);
           setUserData(authData.user);

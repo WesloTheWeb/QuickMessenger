@@ -10,8 +10,6 @@ interface UserProfileProps {
 
 const UserProfile = ({ userData }: UserProfileProps) => {
 
-    console.log('userData prop', userData)
-
     return (
         <section className={UserProfileContainer}>
             <h2>User Settings for {userData.username}</h2>

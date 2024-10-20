@@ -10,7 +10,6 @@ export async function middleware(request: NextRequest) {
   }
 
   try {
-    // Using jsonwebtoken instead of jose
     jwt.verify(token, process.env.JWT_SECRET as string);
     return NextResponse.next();
   } catch (error) {

@@ -1,9 +1,11 @@
 .profileInput {
     display: flex;
     flex-direction: column;
+    margin: 1rem 0;
 
     label { 
         display: block;
+        text-transform: capitalize;
         margin-bottom: 0.5rem;
     }
 
@@ -11,13 +13,23 @@
         align-items: center;
 
         input {
+            font-size: 1.2rem;
             flex-grow: 1;
             padding: 0.2rem 0.75rem;
             margin-right: 0.5rem;
+            border-radius: 5px;
+        }
+
+        .emailBtn {
+            background-color: #87858546;
+            cursor: not-allowed;
+
+            &:hover {
+                background-color: #c1c1c146;
+            }
         }
 
         button {
-            // height: 100%;
             font-size: 1rem;
             border-radius: 5px;
             margin: 0 .5rem;
@@ -31,3 +43,4 @@
         }
     }
 }
+
