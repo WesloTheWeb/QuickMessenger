@@ -1,6 +1,23 @@
+@import '../../../styles/variables.scss';
+
 .menuContainer {
     display: flex;
+    background-color: $menuBackgroundColor;
     flex-direction: column;
     border: .75px solid white;
-    border-radius: 10px 0 0 10px;
+    // border-radius: 10px 0 0 10px;
+
+    button {
+        background: none;
+        font-size: 1.3rem;
+        color: $menuTextColor;
+    }
+
+    a {
+        text-align: center;
+
+        &:hover {
+            background-color: #373535;
+        }
+    }
 }

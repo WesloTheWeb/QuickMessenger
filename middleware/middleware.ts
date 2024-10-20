@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { jwtVerify } from 'jose';
+import jwt from 'jsonwebtoken';
 
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get('token')?.value;
@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
   }
 
   try {
-    const { payload } = await jwtVerify(token, new TextEncoder().encode(process.env.JWT_SECRET));
+    jwt.verify(token, process.env.JWT_SECRET as string);
     return NextResponse.next();
   } catch (error) {
     return NextResponse.redirect(new URL('/login', request.url));
@@ -18,5 +18,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/api/protected/:path*'],
+  matcher: ['/dashboard/:path*', '/profile/:path*', '/api/protected/:path*'],
 };

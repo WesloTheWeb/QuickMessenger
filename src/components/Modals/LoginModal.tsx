@@ -1,6 +1,8 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAppDispatch } from '@/redux/hooks';
+import { login } from '@/redux/slices/authSlice';
 import Overlay from './Overlay';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import classes from './LoginModal.module.scss';
@@ -21,6 +23,7 @@ const LoginModal = ({ onClose, onLoginSuccess }: LoginModalProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
   const [loginError, setLoginError] = useState<string | null>(null);
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
@@ -36,6 +39,7 @@ const LoginModal = ({ onClose, onLoginSuccess }: LoginModalProps) => {
         // Set the token in a cookie
         document.cookie = `token=${result.token}; path=/; max-age=3600; SameSite=Strict; Secure`;
         // onClose();
+        dispatch(login({ id: result.user.id, username: result.user.username }));
         onLoginSuccess();
         router.push('/dashboard');
       } else {
@@ -53,6 +57,7 @@ const LoginModal = ({ onClose, onLoginSuccess }: LoginModalProps) => {
       <div className={modal} onClick={(e) => e.stopPropagation()}>
         <h2>Sign In</h2>
         <p>Use your credentials to sign in below</p>
+        {errors ? <p>{loginError}</p> : null}
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={formGroup}>
             <input

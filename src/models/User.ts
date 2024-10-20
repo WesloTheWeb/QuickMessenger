@@ -9,7 +9,7 @@ interface IUser extends Document {
     age: number;
     country: string;
     email: string;
-    userName: string;
+    username: string;
     password: string;
 };
 
@@ -20,7 +20,7 @@ const userSchema: Schema = new mongoose.Schema({
     age: { type: Number, required: true },
     country: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    userName: { type: String, required: true, unique: true },
+    username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
 }, { timestamps: true });
 

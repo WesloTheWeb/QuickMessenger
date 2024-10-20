@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import NavigationBar from "./NavigationBar/NavigationBar";
-import MobileNavigationBar from './NavigationBar/Mobile/MobileNavigationBar';
-import { NavigationItem } from '@/interfaces/NavigationInterface';
 import classes from "./Header.module.scss";
 import MobileNavigationWrapper from './NavigationBar/Mobile/MobileNavigationWrapper';
+import StoreProvider from '../StoreProvider';
 
 const { headerContainer, logoLink } = classes;
 
@@ -32,7 +31,9 @@ const Header = () => {
           style={{ width: '100%', height: 'auto' }}
         />
       </Link>
-      <NavigationBar navigation={navigationLinks} />
+      <StoreProvider>
+        <NavigationBar navigation={navigationLinks} />
+      </StoreProvider>
       <MobileNavigationWrapper navigation={navigationLinks} />
       {/* <MobileNavigationBar navigation={navigationLinks} /> */}
     </section>

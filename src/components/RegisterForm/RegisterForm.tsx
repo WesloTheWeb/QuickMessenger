@@ -1,23 +1,13 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { FormValues } from '@/interfaces/FormInterface';
 import Button, { ButtonTypes } from '../Button/Button';
 import classes from './RegisterForm.module.scss';
 import Link from 'next/link';
 
 const { registrationPersonalInformationContainer, registrationGenderAgeContainer, buttonContainer,
-  registrationGenderAgeInnerContainer, form, header, registerInputFieldContainer, radioGroup } = classes
-
-interface FormValues {
-  firstName: string;
-  lastName?: string;
-  gender: string;
-  age: number;
-  country: string;
-  email: string;
-  userName: string;
-  password: string;
-};
+  registrationGenderAgeInnerContainer, form, header, registerInputFieldContainer, radioGroup } = classes;
 
 const RegisterForm = () => {
   const { register, handleSubmit, control, formState: { errors }, reset } = useForm<FormValues>();
@@ -210,10 +200,10 @@ const RegisterForm = () => {
             Username
           </label>
           <input
-            {...register('userName', { required: '*Username is required' })}
+            {...register('username', { required: '*Username is required' })}
             placeholder="Username"
           />
-          {errors?.userName && <p className="errorMessage">{errors.userName.message}</p>}
+          {errors?.username && <p className="errorMessage">{errors.username.message}</p>}
         </div>
         <div className={registerInputFieldContainer}>
           <label>
@@ -239,3 +229,7 @@ const RegisterForm = () => {
 };
 
 export default RegisterForm;
+
+// TODO: Issue when completing form. Operation completes.
+// TODO: Actually form resets. Maybe clear the form with a toast saying its done a completed state instead of clearing form.
+// TODO: Fix typescript issue on handleClick

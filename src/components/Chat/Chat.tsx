@@ -1,5 +1,5 @@
 import classes from './Chat.module.scss';
-import Chatbox from './ChatBox';
+import Chatbox from './Chatbox';
 
 const { chatContainer } = classes;
 
