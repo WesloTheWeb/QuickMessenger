@@ -51,8 +51,8 @@ Below is the tech stack I will be using. Not all of it is implemented.
 - React Hook Form
 - Redux Tool Kit (RTK) + Redux
 
-### Back-End (Not yet implemented yet)
+### Back-End
 - ReactQuery
 - Socket.io
-- MongoDB (or Redis) 
+- MongoDB
 - NextAuth
