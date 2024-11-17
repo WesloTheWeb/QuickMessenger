@@ -8,7 +8,7 @@ const LandingHeader = ({ }) => {
             <h2>A new way to chat</h2>
             <p>
                 Introducing <b>Quick Messenger</b> – Your go-to chatroom for spontaneous conversations, interactive communities,
-                and endless fun! Whether you're looking to hang out with friends or connect with new people,
+                and endless fun! Whether you&apos;re looking to hang out with friends or connect with new people,
                 We are here to keep you engaged like the mid 00s of chatrooms with friends and people you have not
                 met yet!
             </p>
