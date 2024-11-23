@@ -1,13 +1,15 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Home, Settings, MessageSquare } from 'lucide-react';
 import { menu_options } from '@/config/chatMenu';
 import { MenuOption } from '@/interfaces/chatMenuInterface';
 import classes from './Menu.module.scss';
 
-const { menuContainer } = classes;
-
-
-const Menu = ({ }) => {
+const Menu = () => {
+    const pathname = usePathname();
+    const { menuContainer } = classes;
 
     const getIcon = (iconName: string) => {
         // CSS class name standards for Lucide icons
@@ -25,7 +27,6 @@ const Menu = ({ }) => {
         }
     };
 
-    // ? de-coupled the map argument:
     const renderMenuItem = ({ actionName, urlPath, icon, implemented }: MenuOption) => {
         if (!implemented) return null;
 
@@ -34,6 +35,7 @@ const Menu = ({ }) => {
                 key={actionName}
                 href={urlPath}
                 className={classes.menuLink}
+                data-active={pathname === urlPath}
             >
                 <button className={classes.menuButton}>
                     {icon && getIcon(icon)}
