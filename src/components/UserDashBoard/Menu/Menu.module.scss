@@ -5,19 +5,29 @@
     background-color: $menuBackgroundColor;
     flex-direction: column;
     border: .75px solid white;
-    // border-radius: 10px 0 0 10px;
+}
 
-    button {
-        background: none;
-        font-size: 1.3rem;
-        color: $menuTextColor;
+.menuLink {
+    text-align: center;
+    text-decoration: none;
+    
+    &:hover {
+        background-color: $chatMenuHoverColor;
     }
+}
 
-    a {
-        text-align: center;
+.menuButton {
+    background: none;
+    font-size: 1.3rem;
+    color: $menuTextColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    transition: background-color 0.2s ease;
+}
 
-        &:hover {
-            background-color: #373535;
-        }
-    }
+.menuIcon {
+    color: $menuTextColor;
 }
